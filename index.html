@@ -3,11 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="shortcut icon" href="https://icons.iconarchive.com/icons/alecive/flatwoken/512/Apps-Weather-icon.png" type="image/x-icon">
     <title>Weather WebApp</title>
 </head>
 <body>
-    
+    <aside>
+        <form class="search-container">
+            <div class="search-wrapper">
+                <i class="bi bi-thermometer-half"></i>
+                <input type="text" id="cityInput" placeholder="City" required class="search-input">
+                <i class="bi bi-search"></i>
+            </div>
+        </form>
+
+        <div class="city-country-name">
+            <h2 class="city-name"></h2>
+            <h3 class="country-name"></h3>
+        </div>
+
+        <div class="weather-info">
+            <i class="bi bi-brightness-high-fill"></i>
+            <p class="temperature"></p>
+            <span class="max-min">Máx.: 33º  Mín.: 17º</span>
+            <br>
+            <p>Sensação: 32º</p>
+        </div>
+    </aside>
 
     <script src="scripts/main.js"></script>
 </body>

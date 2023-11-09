@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;400;600&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -7,4 +9,107 @@
 body{
     width: 100vw;
     height: 100vh;
+    background-image: url('../images/cloudy.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+aside{
+    width: 25%;
+    height: 100%;
+    background: rgba(137, 137, 137, 0.25);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    border-radius: 0 10px 10px 0;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3% 0;
+}
+
+.search-container{
+    width: 100%;
+    padding: 0 10%;
+    font-size: 1.4em;
+    color: #fff;
+}
+
+.search-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.search-input{   
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid rgb(194, 194, 194);
+    outline: none;
+    background-color:transparent;
+    color: #fff;
+    padding: 0 2%;
+    font-size: 1em;
+}
+
+.search-input::placeholder{
+    color: rgb(194, 194, 194);
+}
+
+.search-input:focus{
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.search-container i{
+    cursor: pointer;
+    color: rgb(194, 194, 194);
+}
+
+.search-focus{
+    color: #fff !important;
+}
+
+.city-country-name{
+    text-align: center;
+}
+
+.city-name,
+.country-name{
+    font-size: 2em;
+    font-weight: 200;
+    color: #fff;
+}
+
+.country-name{
+    font-size: 1.3em;
+}
+
+.weather-info{
+    font-size: 1.5em;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.weather-info i{
+    font-size: 3em;
+    color: yellow;
+}
+
+.weather-info .temperature{
+    font-size: 4em;
+}
+
+.weather-info .temperature .degrees{
+    font-size: .7em;
 }
