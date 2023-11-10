@@ -138,6 +138,10 @@ const displayResult = (data) => {
     const hour = document.querySelector('.hour')
     hour.innerText = convertUnixToDateFormat(unixTimestamp)
 
+    console.log(convertUnixToDateFormat(1699628400)) 
+    console.log(convertUnixToDateFormat(1699639200)) 
+    console.log(convertUnixToDateFormat(1699650000)) 
+
 }
 
 for (const i of icons) {
