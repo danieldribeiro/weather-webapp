@@ -9,7 +9,7 @@
 body{
     width: 100vw;
     height: 100vh;
-    background-image: url('../images/rainy.jpg');
+    background-image: url('../images/sunny.jpg');
     background-size: cover;
     background-position: center;
     font-family: 'Raleway', sans-serif;
@@ -29,7 +29,7 @@ aside{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 3% 0 15%;
+    padding: 3% 0 10%;
 }
 
 .search-container{
@@ -102,9 +102,16 @@ aside{
     gap: 15px;
 }
 
-.bi-brightness-high-fill {
+.bi-brightness-high-fill,
+.bi-cloud-rain-fill,
+.bi-cloud-fill {
     font-size: 5em;
     color: yellow;
+}
+
+.bi-cloud-rain-fill,
+.bi-cloud-fill{
+    color: #fff;
 }
 
 .weather-info .temperature{
@@ -122,7 +129,7 @@ aside{
     flex-wrap: wrap;
     gap: 5%;
     row-gap: 10px;
-    justify-content: center;
+    margin-top: 20px;
 }
 
 main{
@@ -130,7 +137,7 @@ main{
     height: 100%;
     color: #fff;
     padding: 8%;
-    text-shadow: 0 0 10px #000;
+    text-shadow: 0 0 15px #000;
     font-size: 1.7em;
     display: flex;
     flex-direction: column;
@@ -141,4 +148,45 @@ main h2{
     font-weight: 500;
     text-transform: capitalize;
     font-size: 2.5em;
+}
+
+.hr{
+    border: 1px solid #ffffff60;
+    margin: 2% 0;
+}
+
+.forecast-container{
+    width: 100%;
+    height: 60%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.forecast{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.hourly{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    margin-top: 20px;
+    font-size: .8em;
+}
+
+#forecastChart{
+    width: 80% !important;
+    height: 120% !important;
+    margin-top: 50px;
+}
+
+.forecastIcon .bi-brightness-high-fill{
+    font-size: 1.1em;
 }
