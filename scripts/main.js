@@ -31,12 +31,6 @@ for (const i of icons) {
     }
 }
 
-function search() {
-    let city = input.value
-    getAndDisplayWeather(city)
-    input.value = ''
-}
-
 const getAndDisplayWeather = async (city) => {
     try {
         const data = await getWeatherData(city)
@@ -65,6 +59,37 @@ const getForecastData = async (city) => {
     getForecastDescription(forecastData)
 
     return forecastData
+}
+
+const getWeatherData = async (city) => {
+    const apiKey = '93794c18194ddc939f782804dd07dee6'
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`
+
+    const response = await fetch(weatherUrl)
+
+    if (!response.ok) {
+        throw new Error(`HTTP error: status ${response.status}`)
+    }
+
+    const data = await response.json()
+    return data
+}
+
+const displayResult = (data) => {
+    changeWeatherIcon(data)
+    displayAside(data)
+    displayMainInfo(data)
+    changeBg(data)
+
+    const hr = document.querySelector('hr')
+    hr.style.display = 'block'
+}
+
+//=================================================== Functions ===================================================
+function search() {
+    let city = input.value
+    getAndDisplayWeather(city)
+    input.value = ''
 }
 
 function setForecastData(forecastData){
@@ -196,32 +221,6 @@ function getForecastDescription(forecastData){
     return description
 }
 
-const getWeatherData = async (city) => {
-    const apiKey = '93794c18194ddc939f782804dd07dee6'
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`
-
-    const response = await fetch(weatherUrl)
-
-    if (!response.ok) {
-        throw new Error(`HTTP error: status ${response.status}`)
-    }
-
-    const data = await response.json()
-    return data
-}
-
-const displayResult = (data) => {
-    changeWeatherIcon(data)
-    displayAside(data)
-    displayMainInfo(data)
-    changeBg(data)
-
-    const hr = document.querySelector('hr')
-    hr.style.display = 'block'
-}
-
-//=================================================== Functions ===================================================
 function changeBg(data){
     const currentHour = new Date().getHours()
 
@@ -233,7 +232,7 @@ function changeBg(data){
         case 'algumas nuvens':
         case 'nuvens dispersas':
             (currentHour >= 18 || currentHour <= 3)
-            ? document.body.style.backgroundImage = 'url("https://raw.githubusercontent.com/danieldribeiro/weather-webapp/main/images/sunny.jpg")'
+            ? document.body.style.backgroundImage = 'url("../images/clear-night.jpg")'
             : document.body.style.backgroundImage = 'url("../images/sunny.jpg")'
             break
         case 'chovendo':
