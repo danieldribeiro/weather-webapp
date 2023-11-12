@@ -146,7 +146,6 @@ main{
     font-size: 1.7em;
     display: flex;
     flex-direction: column;
-    gap: 30px;
 }
 
 main h2{
