@@ -222,10 +222,6 @@ const displayResult = (data) => {
 }
 
 //=================================================== Functions ===================================================
-function changeBgNight(){
-    document.body.style.backgroundImage = 'url("../images/clear-night.jpg")'
-}
-
 function changeBg(data){
     const currentHour = new Date().getHours()
 
