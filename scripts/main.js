@@ -58,53 +58,142 @@ const getForecastData = async (city) => {
     }
 
     const forecastData = await response.json()
+
+    setForecastData(forecastData)
+    getForecastTemperature(forecastData)
+    getForecastHours(forecastData)
+    getForecastDescription(forecastData)
+
+    return forecastData
+}
+
+function setForecastData(forecastData){
     const children = document.querySelector('.forecast').children
-    const date = new Date()
+    const temperature =getForecastTemperature(forecastData)
+    const hours = getForecastHours(forecastData)
+    const getDescription = getForecastDescription(forecastData)
+
+    let setDescription = []
+    getDescription.map((e, i) => {
+        switch(e){
+            case 'céu limpo':
+            case 'nuvens dispersas':
+            case 'algumas nuvens':
+                setDescription.push((hours[i] === '18:00' || hours[i] === '21:00' || hours[i] === '00:00' || hours[i] === '03:00')
+                    ? '<i class="bi bi-moon-stars-fill"></i>'
+                    : '<i class="bi bi-brightness-high-fill"></i>')
+                break
+            case 'nublado':
+                setDescription.push('<i class="bi bi-cloud-fill"></i>')
+                break
+            case 'chovendo':
+            case 'chuva leve':
+            case 'chuva moderada':
+            case 'chuva forte':
+            case 'chuvisco de intensidade leve':
+            case 'chuvisco':
+            case 'chuvisco de intensidade forte':
+            case 'chuvisco de intensidade leve':
+            case 'chuva de chuvisco':
+            case 'chuvisco de intensidade forte':
+            case 'chuva e chuvisco':
+            case 'chuva intensa e chuvisco':
+            case 'chuvisco de chuva':
+            case 'chuva de intensidade forte':
+            case 'chuva muito forte':
+            case 'chuva extrema':
+            case 'chuva congelante':
+            case 'chuva leve de intensidade':
+            case 'chuva de chuvisco':
+            case 'chuva de intensidade forte':
+            case 'chuva irregular':
+                setDescription.push('<i class="bi bi-cloud-rain-fill"></i>')
+                break
+            case 'pouca neve':
+            case 'neve leve':
+            case 'neve':
+            case 'neve intensa':
+            case 'chuva com neve':
+            case 'chuva de neve leve':
+            case 'chuva de neve':
+            case 'chuva leve e neve':
+            case 'chuva e neve':
+            case 'chuva leve de neve':
+            case 'chuva de neve':
+                setDescription.push('<i class="bi bi-cloud-snow-fill"></i>')
+                break
+        }
+    })
 
     for(i = 0; i <= children.length; i++){
         switch(i){
             case 0:
-                children.item(i).innerHTML = `  <p class='forecastIcon'></p>
-                                                <p>${String((date.getHours() + 3) % 24).padStart(2, '0')}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[0].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[0]}</p>
+                                                <p>${hours[0]}</p>`
                 break
             case 1:
-                children.item(i).innerHTML = `  <i class="bi bi-moon-stars-fill"></i>
-                                                <p>${String((date.getHours() + 6) % 24).padStart(2, '0')}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[1].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[1]}</p>
+                                                <p>${hours[1]}</p>`
                 break
             case 2:
-                children.item(i).innerHTML = `  <i class="bi bi-moon-stars-fill"></i>
-                                                <p>${String((date.getHours() + 9) % 24).padStart(2, '0')}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[2].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[2]}</p>
+                                                <p>${hours[2]}</p>`
                 break
             case 3:
-                children.item(i).innerHTML = `  <i class="bi bi-moon-stars-fill"></i>
-                                                <p>${String((date.getHours() + 12) % 24).padStart(2, '0')}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[3].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[3]}</p>
+                                                <p>${hours[3]}</p>`
                 break
             case 4:
-                children.item(i).innerHTML = `  <i class="bi bi-moon-stars-fill"></i>
-                                                <p>${String((date.getHours() + 15) % 24).padStart(2, '0')}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[4].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[4]}</p>
+                                                <p>${hours[4]}</p>`
                 break
             case 5:
-                children.item(i).innerHTML = `  <i class="bi bi-moon-stars-fill"></i>
-                                                <p>${String((date.getHours() + 18) % 24).padStart(2, '0')}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[5].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[5]}</p>
+                                                <p>${hours[5]}</p>`
                 break
             case 6:
-                children.item(i).innerHTML = `  <i class="bi bi-moon-stars-fill"></i>
-                                                <p>${String((date.getHours() + 21) % 24).padStart(2, '0')}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[6].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[6]}</p>
+                                                <p>${hours[6]}</p>`
                 break
             case 7:
-                children.item(i).innerHTML = `  <i class="bi bi-moon-stars-fill"></i>
-                                                <p>${date.getHours()}:00</p>`
+                children.item(i).innerHTML = `  ${temperature[7].toFixed(0)}º
+                                                <p class='forecastIcon'>${setDescription[7]}</p>
+                                                <p>${hours[7]}</p>`
                 break
         }
     }
+}
 
+function getForecastTemperature(forecastData){
+    let temp = []
     for(i of forecastData.list.slice(0, 8)){
-        console.log(i)
+        temp.push(i.main.temp)
     }
+    displayChart(temp)
+    return temp
+}
 
-    changeForecastIcons(forecastData)
+function getForecastHours (forecastData) {
+    let hour = []
+    for(i of forecastData.list.slice(0, 8)){
+        hour.push(i.dt_txt.slice(11, 16))
+    }
+    return hour
+}
 
-    return forecastData
+function getForecastDescription(forecastData){
+    let description = []
+    for(i of forecastData.list.slice(0, 8)){
+        description.push(i.weather[0].description)
+    }
+    return description
 }
 
 const getWeatherData = async (city) => {
@@ -127,9 +216,10 @@ const displayResult = (data) => {
     displayAside(data)
     displayMainInfo(data)
     changeBg(data)
-    displayChart()
-}
 
+    const hr = document.querySelector('hr')
+    hr.style.display = 'block'
+}
 
 //=================================================== Functions ===================================================
 function changeBgNight(){
@@ -137,6 +227,8 @@ function changeBgNight(){
 }
 
 function changeBg(data){
+    const currentHour = new Date().getHours()
+
     switch(data.weather[0].description){
         case 'nublado':
             document.body.style.backgroundImage = 'url("../images/cloudy.jpg")'
@@ -144,13 +236,44 @@ function changeBg(data){
         case 'céu limpo':
         case 'algumas nuvens':
         case 'nuvens dispersas':
-            document.body.style.backgroundImage = 'url("../images/sunny.jpg")'
+            (currentHour >= 18 || currentHour <= 3)
+            ? document.body.style.backgroundImage = 'url("../images/clear-night.jpg")'
+            : document.body.style.backgroundImage = 'url("../images/sunny.jpg")'
             break
         case 'chovendo':
-        case 'chuva moderada':
-        case 'trovoada com chuva fraca':
         case 'chuva leve':
+        case 'chuva moderada':
+        case 'chuvisco de intensidade leve':
+        case 'chuvisco':
+        case 'chuvisco de intensidade forte':
+        case 'chuvisco de intensidade leve':
+        case 'chuva de chuvisco':
+        case 'chuvisco de intensidade forte':
+        case 'chuva e chuvisco':
+        case 'chuva intensa e chuvisco':
+        case 'chuvisco de chuva':
+        case 'chuva de intensidade forte':
+        case 'chuva muito forte':
+        case 'chuva extrema':
+        case 'chuva congelante':
+        case 'chuva leve de intensidade':
+        case 'chuva de chuvisco':
+        case 'chuva de intensidade forte':
+        case 'chuva irregular':
             document.body.style.backgroundImage = 'url("../images/rainy.jpg")'
+            break
+        case 'pouca neve':
+        case 'neve leve':
+        case 'neve':
+        case 'neve intensa':
+        case 'chuva com neve':
+        case 'chuva de neve leve':
+        case 'chuva de neve':
+        case 'chuva leve e neve':
+        case 'chuva e neve':
+        case 'chuva leve de neve':
+        case 'chuva de neve':
+            document.body.style.backgroundImage = 'url("../images/snowing.jpg")'
             break
     }
 }
@@ -174,18 +297,53 @@ async function getCountryName(countryCode) {
 
 function changeWeatherIcon(data){
     const weatherIcon = document.querySelector('.weather-icon')
+    const currentHour = new Date().getHours()
+
     switch(data.weather[0].description){
         case 'nublado':
-            weatherIcon.innerHTML = '<i class="bi bi-cloud-fill"></i>'
+            weatherIcon.innerHTML = '<i class="bi bi-cloud-fill weather-icon"></i>'
             break
         case 'céu limpo':
         case 'nuvens dispersas':
         case 'algumas nuvens':
-            weatherIcon.innerHTML = '<i class="bi bi-brightness-high-fill"></i>'
+            (currentHour >= 18 || currentHour <= 3)
+            ? weatherIcon.innerHTML = '<i class="bi bi-moon-stars-fill weather-icon"></i>'
+            : weatherIcon.innerHTML = '<i class="bi bi-brightness-high-fill weather-icon"></i>'
             break
         case 'chovendo':
+        case 'chuva leve':
         case 'chuva moderada':
-            weatherIcon.innerHTML = '<i class="bi bi-cloud-rain-fill"></i>'
+        case 'chuvisco de intensidade leve':
+        case 'chuvisco':
+        case 'chuvisco de intensidade forte':
+        case 'chuvisco de intensidade leve':
+        case 'chuva de chuvisco':
+        case 'chuvisco de intensidade forte':
+        case 'chuva e chuvisco':
+        case 'chuva intensa e chuvisco':
+        case 'chuvisco de chuva':
+        case 'chuva de intensidade forte':
+        case 'chuva muito forte':
+        case 'chuva extrema':
+        case 'chuva congelante':
+        case 'chuva leve de intensidade':
+        case 'chuva de chuvisco':
+        case 'chuva de intensidade forte':
+        case 'chuva irregular':
+            weatherIcon.innerHTML = '<i class="bi bi-cloud-rain-fill weather-icon"></i>'
+            break
+        case 'pouca neve':
+        case 'neve leve':
+        case' neve':
+        case 'neve intensa':
+        case 'chuva com neve':
+        case 'chuva de neve leve':
+        case 'chuva de neve':
+        case 'chuva leve e neve':
+        case 'chuva e neve':
+        case 'chuva leve de neve':
+        case 'chuva de neve':
+            weatherIcon.innerHTML = '<i class="bi bi-cloud-snow-fill"></i>'
             break
     }
 }
@@ -261,39 +419,26 @@ function displayMainInfo(data){
     wind.innerHTML = `<i class="bi bi-wind"></i> Vento: ${data.wind.speed.toFixed(1)}Km/h`
 }
 
-function changeForecastIcons(forecastData){
-    const forecastIcon = document.querySelector('.forecastIcon')
-    switch(forecastData.list[0].weather[0].description){
-        case 'nublado':
-            forecastIcon.innerHTML = '<i class="bi bi-cloud-fill"></i>'
-            break
-        case 'céu limpo':
-        case 'nuvens dispersas':
-        case 'algumas nuvens':
-            forecastIcon.innerHTML = '<i class="bi bi-brightness-high-fill"></i>'
-            break
-        case 'chovendo':
-        case 'chuva moderada':
-            forecastIcon.innerHTML = '<i class="bi bi-cloud-rain-fill"></i>'
-            break
-    }
-}
-
 const ctx = document.getElementById('forecastChart');
 let chart = null
 
-const displayChart = () => {
+const displayChart = (temp) => {
         if (chart) {
             chart.destroy();
         }
 
+        let temperatures = []
+        temp.map((e) => {
+            temperatures.push(e.toFixed(0))
+        })
+
         chart = new Chart(ctx, {
             type: 'line',
             data: {
-                    labels: ['', '', '', '', '', '', ''],
+                    labels: ['', '', '', '', '', '', '', ''],
                     datasets: [{
                     label: '',
-                    data: [24, 23, 22, 23, 28, 32, 31, 28],
+                    data: temperatures,
                     borderWidth: 3,
                     borderColor: 'rgb(255, 165, 0)',
                     tension: .4
@@ -307,7 +452,7 @@ const displayChart = () => {
                     },
                     y: {
                         display: false,
-                        beginAtZero: true
+                        beginAtZero: false
                     }
                 },
                 plugins: {

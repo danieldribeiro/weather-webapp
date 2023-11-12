@@ -109,8 +109,13 @@ aside{
     color: yellow;
 }
 
+.weather-icon{
+    font-size: 2.5em;
+}
+
 .bi-cloud-rain-fill,
-.bi-cloud-fill{
+.bi-cloud-fill,
+.bi-moon-stars-fill{
     color: #fff;
 }
 
@@ -136,7 +141,7 @@ main{
     width: 75%;
     height: 100%;
     color: #fff;
-    padding: 8%;
+    padding: 4% 8%;
     text-shadow: 0 0 15px #000;
     font-size: 1.7em;
     display: flex;
@@ -153,6 +158,7 @@ main h2{
 .hr{
     border: 1px solid #ffffff60;
     margin: 2% 0;
+    display: none;
 }
 
 .forecast-container{
@@ -162,13 +168,12 @@ main h2{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     overflow: hidden;
 }
 
 .forecast{
     display: flex;
-    width: 80%;
+    width: 85%;
     justify-content: space-between;
 }
 
@@ -179,14 +184,150 @@ main h2{
     width: fit-content;
     margin-top: 20px;
     font-size: .8em;
+    gap: 10px;
 }
 
-#forecastChart{
-    width: 80% !important;
-    height: 120% !important;
-    margin-top: 50px;
+#forecastChart {
+    width: 85% !important;
+    height: 70% !important;
+    max-height: 600px;
+    margin-top: 20px;
 }
 
-.forecastIcon .bi-brightness-high-fill{
+.forecastIcon .bi-brightness-high-fill,
+.forecastIcon .bi-cloud-rain-fill,
+.forecastIcon .bi-cloud-fill{
     font-size: 1.1em;
+}
+
+@media screen and (min-width: 1440px){
+    main{
+        padding: 4% 8%;
+        font-size: 1.4em;
+    }
+    
+    main h2{
+        font-size: 2em;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1439px) {
+    .hr{
+        margin: 1% 0;
+    }
+
+    #forecastChart {
+        width: 80% !important;
+        height: 55% !important;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    main{
+        padding: 10% 4%;
+        text-shadow: 0 0 15px #000;
+        font-size: 1.7em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 30px;
+    }
+    
+    main h2{
+        font-weight: 500;
+        text-transform: capitalize;
+        font-size: 2.2em;
+    }
+    
+    aside{
+        width: 35%;
+        font-size: .8em;
+    }
+
+    .forecast{
+        width: 95%;
+    }
+
+    #forecastChart {
+        width: 90% !important;
+        height: 50% !important;
+    }
+}
+
+@media screen and (max-width: 768px){
+    body{
+        height: 100%;
+        flex-direction: column;
+        background-color: cover;
+    }
+
+    aside{
+        width: 100%;
+        gap: 20px;
+        font-size: .8em;
+        border-radius: 0 0 20px 20px;
+    }
+
+    main{
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        padding: 4% 8%;
+        text-shadow: 0 0 15px #000;
+        font-size: 1.3em;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    main h2{
+        font-size: 2.5em;
+    }
+    
+    .hr{
+        border: 1px solid #ffffff60;
+        margin: 2% 0;
+    }
+
+    .weather-details{
+        font-size: .8em;
+        justify-content: space-between;
+        gap: 1%;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    body{
+        width: 100vw;
+        min-height: 100vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    main{
+        padding: 4% 2%;
+        font-size: 1em;
+    }
+    
+    main h2{
+        font-size: 2em;
+    }
+    
+    .hr{
+        margin: 1% 0;
+    }
+
+    .weather-details{
+        gap: 1%;
+        row-gap: 10px;
+        padding: 0 5%;
+    }
+    
+    .forecast{
+        width: 95%;
+    }
+
+    #forecastChart {
+        width: 90% !important;
+    }
 }
