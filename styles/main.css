@@ -220,6 +220,38 @@ main h2{
         width: 80% !important;
         height: 55% !important;
     }
+
+    aside{
+        font-size: .8em;
+    }
+
+    main{
+        padding: 4% 2%;
+        font-size: 1.5em;
+        gap: 15px;
+    }
+    
+    main h2{
+        font-size: 2em;
+    }
+    
+    .hr{
+        margin: 1% 0;
+    }
+
+    .weather-details{
+        padding: 0;
+    }
+    
+    .forecast{
+        width: 75%;
+        height: 80%;
+    }
+
+    #forecastChart {
+        width: 75% !important;
+        height: auto;
+    }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
